@@ -5,8 +5,8 @@ import router from "./router";
 import service from "./utils/https";
 import urls from "./utils/urls";
 import mixin from "./mixins";
-import { 
-    ElButton, 
+import {
+    ElButton,
     ElDialog,
     ElForm,
     ElFormItem,

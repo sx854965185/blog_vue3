@@ -1,49 +1,26 @@
-<template>
-  <div class="home">
-    <Renderer ref="renderer" pointer resize="window">
-      <Camera :position="{ z: 0 }" :fov="50" />
-      <Scene>
-        <Points ref="points" :position="{ z: -150 }">
-          <BufferGeometry :attributes="attributes" />
-          <ShaderMaterial :blending="2" :depth-test="false" :uniforms="uniforms" :vertex-shader="vertexShader" :fragment-shader="fragmentShader">
-            <Texture src="/img/sprite.png" uniform="uTexture" />
-          </ShaderMaterial>
-        </Points>
-      </Scene>
-      <EffectComposer>
-        <RenderPass />
-        <UnrealBloomPass :strength="2" :radius="0" :threshold="0" />
-        <ZoomBlurPass :strength="zoomStrength" />
-      </EffectComposer>
-    </Renderer>
-    <a href="#" @click="updateColors" @mouseenter="targetTimeCoef = 100" @mouseleave="targetTimeCoef = 1">Random Colors</a>
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent, onMounted } from "vue";
 import {
-  lerp,
-  BufferGeometry,
-  Camera,
-  EffectComposer,
-  Points,
-  Renderer,
-  RenderPass,
-  Scene,
-  ShaderMaterial,
-  Texture,
-  UnrealBloomPass,
-  ZoomBlurPass,
-} from "troisjs";
+	createApp
+} from 'https://unpkg.com/vue@3.0.11/dist/vue.esm-browser.prod.js'
+import {
+	lerp,
+	BufferGeometry,
+	Camera,
+	EffectComposer,
+	Points,
+	Renderer,
+	RenderPass,
+	Scene,
+	ShaderMaterial,
+	Texture,
+	UnrealBloomPass,
+	ZoomBlurPass
+} from 'https://unpkg.com/troisjs@0.3.0-beta.4/build/trois.module.cdn.min.js'
 import {
 	Clock,
 	Color,
 	MathUtils,
 	Vector3
-} from "three";
-import { ElMessage } from "element-plus";
-
+} from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 const niceColors = [
 	["#69d2e7", "#a7dbd8", "#e0e4cc", "#f38630", "#fa6900"],
 	["#fe4365", "#fc9d9a", "#f9cdad", "#c8c8a9", "#83af9b"],
@@ -173,23 +150,40 @@ const fragmentShader = `
     gl_FragColor = vColor * texture2D(uTexture, gl_PointCoord);
   }
 `
-
-export default defineComponent({
-  name: "Home",
-  components: {
-    BufferGeometry,
-    Camera,
-    EffectComposer,
-    Points,
-    Renderer,
-    RenderPass,
-    Scene,
-    ShaderMaterial,
-    Texture,
-    UnrealBloomPass,
-    ZoomBlurPass,
-  },
-  setup() {
+createApp({
+	template: `
+    <Renderer ref="renderer" pointer resize="window">
+      <Camera :position="{ z: 0 }" :fov="50" />
+      <Scene>
+        <Points ref="points" :position="{ z: -150 }">
+          <BufferGeometry :attributes="attributes" />
+          <ShaderMaterial :blending="2" :depth-test="false" :uniforms="uniforms" :vertex-shader="vertexShader" :fragment-shader="fragmentShader">
+            <Texture src="https://assets.codepen.io/33787/sprite.png" uniform="uTexture" />
+          </ShaderMaterial>
+        </Points>
+      </Scene>
+      <EffectComposer>
+        <RenderPass />
+        <UnrealBloomPass :strength="2" :radius="0" :threshold="0" />
+        <ZoomBlurPass :strength="zoomStrength" />
+      </EffectComposer>
+    </Renderer>
+    <a href="#" @click="updateColors" @mouseenter="targetTimeCoef = 100" @mouseleave="targetTimeCoef = 1">Random Colors</a>
+  `,
+	components: {
+		BufferGeometry,
+		Camera,
+		EffectComposer,
+		Points,
+		Renderer,
+		RenderPass,
+		Scene,
+		ShaderMaterial,
+		Texture,
+		UnrealBloomPass,
+		ZoomBlurPass
+	},
+	setup() {
 		const POINTS_COUNT = 50000
 		const palette = niceColors[83]
 		const positions = new Float32Array(POINTS_COUNT * 3)
@@ -269,34 +263,4 @@ export default defineComponent({
 			colorAttribute.needsUpdate = true
 		},
 	},
-});
-</script>
-
-<style lang="less" scoped>
-.home {
-  position: absolute;
-  top: 0;
-  left: 0;
-  canvas {
-    display: block;
-  }
-
-  a {
-    font-family: "Montserrat", sans-serif;
-    font-size: 30px;
-    position: absolute;
-    top: calc(50% - 25px);
-    left: calc(50% - 150px);
-    width: 300px;
-    height: 50px;
-    line-height: 50px;
-    box-sizing: border-box;
-    text-align: center;
-    text-decoration: none;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: 1px solid #fff;
-    border-radius: 50px;
-  }
-}
-</style>
+}).mount('#app')
