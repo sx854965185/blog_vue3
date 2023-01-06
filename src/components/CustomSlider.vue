@@ -5,9 +5,9 @@
       src="../assets/userLogo.jpeg"
       alt=""
     >
-    <div class="title">夜尽天明</div>
+    <div class="title">申小璇</div>
     <div class="right-content">
-      <!-- <div class="item">
+      <div class="item">
         <div class="num">123</div>粉丝
       </div>
       <div class="item">
@@ -18,7 +18,7 @@
       </div>
       <div class="item">
         <div class="num">123</div>收获喜欢
-      </div> -->
+      </div>
     </div>
     <div class="tags">
       <div class="title">标签云</div>

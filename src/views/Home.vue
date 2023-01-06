@@ -16,7 +16,7 @@
         <ZoomBlurPass :strength="zoomStrength" />
       </EffectComposer>
     </Renderer>
-    <a href="#" @click="updateColors" @mouseenter="targetTimeCoef = 100" @mouseleave="targetTimeCoef = 1">Random Colors</a>
+    <a href="#" @click="updateColors" @mouseenter="targetTimeCoef = 100" @mouseleave="targetTimeCoef = 1">进入博客</a>
   </div>
 </template>
 
@@ -43,6 +43,7 @@ import {
 	Vector3
 } from "three";
 import { ElMessage } from "element-plus";
+import { useRouter } from "vue-router";
 
 const niceColors = [
 	["#69d2e7", "#a7dbd8", "#e0e4cc", "#f38630", "#fa6900"],
@@ -178,18 +179,19 @@ export default defineComponent({
   name: "Home",
   components: {
     BufferGeometry,
-    Camera,
-    EffectComposer,
-    Points,
-    Renderer,
-    RenderPass,
-    Scene,
-    ShaderMaterial,
-    Texture,
-    UnrealBloomPass,
-    ZoomBlurPass,
+		Camera,
+		EffectComposer,
+		Points,
+		Renderer,
+		RenderPass,
+		Scene,
+		ShaderMaterial,
+		Texture,
+		UnrealBloomPass,
+		ZoomBlurPass
   },
   setup() {
+    
 		const POINTS_COUNT = 50000
 		const palette = niceColors[83]
 		const positions = new Float32Array(POINTS_COUNT * 3)
@@ -199,8 +201,10 @@ export default defineComponent({
 			color = new Color()
 		for (let i = 0; i < POINTS_COUNT; i++) {
 			v3.set(rndFS(200), rndFS(200), rndFS(300))
+      //@ts-ignore
 			v3.toArray(positions, i * 3)
 			color.set(palette[Math.floor(rnd(0, palette.length))])
+      //@ts-ignore
 			color.toArray(colors, i * 3)
 			sizes[i] = rnd(5, 20)
 		}
@@ -257,16 +261,17 @@ export default defineComponent({
 	},
 	methods: {
 		updateColors() {
-			const colorAttribute = this.$refs.points.geometry.attributes.color
-			const ip = randInt(0, 99);
-			const palette = niceColors[ip];
-			console.log(ip)
-			const color = new Color()
-			for (let i = 0; i < this.POINTS_COUNT; i++) {
-				color.set(palette[randInt(0, palette.length)])
-				color.toArray(colorAttribute.array, i * 3)
-			}
-			colorAttribute.needsUpdate = true
+			// const colorAttribute = this.$refs.points.geometry.attributes.color
+			// const ip = randInt(0, 99);
+			// const palette = niceColors[ip];
+			// console.log(ip)
+			// const color = new Color()
+			// for (let i = 0; i < this.POINTS_COUNT; i++) {
+			// 	color.set(palette[randInt(0, palette.length)])
+			// 	color.toArray(colorAttribute.array, i * 3)
+			// }
+			// colorAttribute.needsUpdate = true
+      this.$router.push("/articles")
 		},
 	},
 });

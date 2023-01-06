@@ -37,7 +37,7 @@ export default defineConfig({
   server: {
     // hostname: '0.0.0.0',
     host: "localhost",
-    port: 3001,
+    port: 8080,
     // // 是否自动在浏览器打开
     // open: true,
     // // 是否开启 https
@@ -46,7 +46,7 @@ export default defineConfig({
     // ssr: false,
     proxy: {
       '/api': {
-        target: 'http://localhost:3333/',
+        target: 'http://localhost:8088/',
         changeOrigin: true,
         ws: true,
         rewrite: (pathStr) => pathStr.replace('/api', '')

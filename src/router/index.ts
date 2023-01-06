@@ -8,11 +8,11 @@ const routes: Array<RouteRecordRaw> = [
         name: "Home",
         component: Home,
     },
-    {
-        path: "/helloWorld",
-        name: "HelloWorld",
-        component: HelloWorld,
-    },
+    // {
+    //     path: "/helloWorld",
+    //     name: "HelloWorld",
+    //     component: HelloWorld,
+    // },
     {
       path: "/articles",
       name: "articles",

@@ -7,13 +7,12 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@types/three": "^0.148.0",
     "axios": "^0.21.1",
     "element-plus": "^1.0.2-beta.41",
     "highlight.js": "^10.7.2",
     "marked": "^2.0.3",
-    "three": "^0.134.0",
-    "troisjs": "^0.3.4",
+    "three": "^0.127.0",
+    "troisjs": "^0.3.0-beta.4",
     "vue": "^3.0.5",
     "vue-router": "^4.0.6",
     "vuex": "^4.0.0"
